@@ -1,0 +1,20 @@
+// This script tells monos to carry pyratite to a container if it's less than full
+
+ubind @mono
+sensor cap container1 @itemCapacity
+sensor items container1 @totalItems
+sensor limit @unit @itemCapacity
+sensor carry @unit @totalItems
+jump 10 lessThan items cap
+ulocate building core false @copper corex corey found core
+ucontrol approach corex corey 3 0 0
+ucontrol itemDrop core carry 3 0 0
+end
+ulocate building core false @copper corex corey found core
+ucontrol approach corex corey 3 0 0
+op sub take limit carry
+ucontrol itemTake core @pyratite take 0 0
+jump 16 greaterThanEq carry limit
+end
+ucontrol move @thisx @thisy 0 0 0
+ucontrol itemDrop container1 carry 0 0 0
